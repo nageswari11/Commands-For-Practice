@@ -41,7 +41,7 @@ Linux:
 
 16) df -h ==> printing the disk space. how much disk space is available in the laptop.
 
-17) top ==> insted of free, noproc,df we nave top all this displays in one command. analys the node status
+17) top ==> insted of free, nproc,df we nave top all this displays in one command. analys the node status
 
 18) man ==> suffix with any command it will gives the usage of the onther command
  eg: man touch
@@ -198,3 +198,4 @@ done
 
 59) trap "echo dont use the ctl+c" SIGINT
  EX: tap "rm -rf *^CSIGINT
+
