@@ -1,0 +1,200 @@
+To connecting to the ec2 instance (server)in the aws:
+=====================================================
+ssh -i //Users/aveerama/Downloads/test11.pem ubuntu@3.92.207.193
+
+
+
+Linux:
+======
+1) ls ==> To list the files and folders in linux
+
+2) pwd ==> to shows the present working directory path
+
+3) cd  ==> cd stands for change the directory. If we want to change the one or two directories forward or backward or one directory to anther directory we use cd. eg:cd bundle/
+
+4) cd .. ==> go to one directory back
+
+5) cd ../.. ==> go to two directories back
+
+6) ls -ltr ==> list all the files and folders with timestamp and who is owner of the file or is it is a file or directory, or what are the permissions for the file like read and write
+
+7) touch ==> to create a file 
+
+8) vi or vim ==> To create a file and write inside the file
+   ESC i ==> it will move to insertmode then write content into the vi or vim
+   Esc:wq! ==> to save the content inside a file
+   Esc:q! ==> 
+
+9)cat ==> we have to see the content of the file
+
+10) mkdir ==> creating a folder or directory
+
+11) rm ==> removing the files
+
+12) rm -r ==> remove a folder or directory
+
+13) free  ==> to find how much memory is used in your Linux machine or laptop
+
+14) free -g ==> it gives much better memory space in separately 
+
+15) nproc ==> to find no.of CPUS in server of laptop
+
+16) df -h ==> printing the disk space. how much disk space is available in the laptop.
+
+17) top ==> insted of free, noproc,df we nave top all this displays in one command. analys the node status
+
+18) man ==> suffix with any command it will gives the usage of the onther command
+ eg: man touch
+
+19) echo ==> to displays the any information or to printing the information provided.
+
+20)./ filename ==> we can execute the shell script or any python script
+eg: ./first-shell-script.sh or 
+
+21)chmod ==> to give the permissions to the file  eg: chmode 777 first-shell.sh--> all permissions to all
+chmode 444 xyz.sh---> read read read for all the user, group, everyone.
+4--->read
+2---->write 
+1---->execute
+
+22) history ==> it shows the all commands what are entered in Linux machine
+
+===> to monitor the node health we have the cpu/ram for cpu we have nproc for listing the no.of cpus are their or not. for ram we have free command what is total memory or used memory like this.
+
+33) custom node script: 
+
+#!/bin/bash
+
+################ ===>comments in scripting
+#Author: Nageswari
+#Date : o1/12/2022
+#
+#This script outputs the node health ==> metadata information
+#
+#Version: v1
+#################
+
+set -x
+set -e
+set -o
+
+#echo "print the disk space"
+df -h
+#echo "print the memory space"
+free -g
+#echo "print the cpu"
+nproc
+ 
+ps -ef | grep amazon | awk -F" " '{print $2}'
+
+
+
+34) set -x ==> print script in debug mode
+
+35) set -e ==> exit the script when their is an error.But will not error out the pipefail so thats why we have set -o pipefail comand
+
+36) set -o pipefail ===> to enable the pipefailure insted of set -e
+
+36)ps -ef ==>find the process in detail on virtual machine
+
+37) ps -ef | grep "amazon" ==>print particularly specifying process related to amazon
+
+38)grep ==> filters  the information from any output
+
+39) | (pipe) ==> sends the ouput of the first command to the second command
+40) awk ==> only print the process id or filter out the information from your out.
+
+41) date ==> print todays date. Date is the default shell command. 
+eg: date |echo "print date is" here this command will not work because of date command is stored in stdin libraries so thats why not stored in the output to the pipe(|).
+
+42)cut
+43)trim
+   ps -ef | grep amazon
+
+
+Q:difference between grep and awk(hok)?
+A: grep gives entire statements. and awk gives a specific columns from the output.
+
+44)ps -ef | grep amazon | awk -F" " '{print $2}' ==>gives the specified processes columns names like processed, usernames
+45)ctrl+c ==> close the process within the terminal
+ 
+===> devops always goto logfiles and check the errors in the log file for application log files.
+
+
+45) curl ==> retrives the information from the internet
+
+46) curl -X GET api.foo.com ==> api information of specified website
+
+47)wget ==> will store the information on the log files.or download the log files by using the urls of internet.
+ EG: cat filename |grep ERROR
+
+48) ls /etc/ ==> 100 or 200 files in etc default system.
+    / ==> means find everything
+
+49) find ==> find is used to find the location that you provided.it is powerful command we can search entire file system.
+
+50) sudo su - ==> it will goes to the root users. sudo means substitute user do and su mens switch user 
+eg: one user to another user like abhishek to suresh
+
+51) exit +enter ==> to logout the root user
+
+52) find / -name pam ===> to find the pam files in ls /etc/ path. it is not possible for it.
+
+
+53)if loop
+syntax:
+if [expression]
+then
+	-----
+	------
+	------
+else
+	-----
+fi
+
+eg:
+#!/bin/bash 
+a=4
+b=10
+
+if [$a -gt $b];
+then
+    echo "a is greater than b"
+else
+    echo "b is greater than a"
+fi
+
+================
+$a,$b ===>is accesing the variable
+-gt ===> gretar than(>)
+
+
+54)for loop==> to execute repetative tasks we use for loop
+syntax: 
+for i in{1..n}; 
+do 
+ echo $i;
+done
+
+
+for i in {1..100};
+do
+ echo $i;
+done
+
+==>first executes the conditions then go to incrementation then go for the finally go to the done statements
+
+55)trap ==>trap is used to trapping the signals
+
+56)kill ==> to kill a process
+ eg:java program is running in your Linux machine
+     kill -9 java
+
+57) yes ==> is continuously running y in terminal
+
+58) ctrl+c ==> for stoping that y process in terminal so here pa
+
+==> email notification using SMTP SERVER these things are done by a trap command
+
+59) trap "echo dont use the ctl+c" SIGINT
+ EX: tap "rm -rf *^CSIGINT
